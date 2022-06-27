@@ -1,0 +1,33 @@
+<div class="login">
+    <div class="d-flex justify-content-between">
+        <div class="image-container">
+            <img src="https://testffc.nimapinfotech.com/assets/media/login/login-page-slider{{setImg}}.jpg" alt="">
+        </div>
+        <div class="login-container position-relative">
+            <div class="position-absolute top-50 start-50 translate-middle">
+                <mat-card class="mat-card">
+                    <mat-card-title class="text-center">Get Started With Field Force</mat-card-title>
+                    <mat-card-content class="mt-5">
+                        <form [formGroup]="signInForm" #signInF (ngSubmit)="signIn($event)">
+                            <mat-form-field appearance="fill" class="d-block">
+                                <mat-label>Email / Mobile number</mat-label>
+                                <input type="text" matInput placeholder="Email / Mobile number" formControlName="username" appNumbersOnly>
+                                <mat-error *ngIf="signInForm.controls['username'].touched && signInForm.controls['username'].invalid">
+                                    Mobile Number Required
+                                </mat-error>
+                            </mat-form-field>
+                            <mat-form-field appearance="fill" class="d-block">
+                                <mat-label>Password</mat-label>
+                                <input type="password" matInput placeholder="Password" formControlName="password">
+                                <mat-error *ngIf="signInForm.controls['password'].touched && signInForm.controls['password'].invalid">
+                                    Password Required
+                                </mat-error>
+                            </mat-form-field>
+                            <button type="submit" mat-raised-button color="primary" class="d-block mt-3">Sign In</button>
+                        </form>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+</div>

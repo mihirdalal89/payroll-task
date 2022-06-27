@@ -1,0 +1,4 @@
+<div class="loader" *ngIf="isloading">
+    <mat-spinner strokeWidth="5"></mat-spinner>
+</div>
+<div [class]="isloading?'loader-overlay':''"></div>

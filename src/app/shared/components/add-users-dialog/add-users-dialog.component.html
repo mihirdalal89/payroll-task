@@ -1,0 +1,16 @@
+<div class="">
+    <h2 mat-dialog-title>Members</h2>
+    <mat-dialog-content class="mat-typography">
+        <form [formGroup]="addUser">
+            <section class="example-section">
+                <mat-checkbox class="example-margin d-block" *ngFor="let member of members" formControlName="addusersData" (change)="onChange($event)" id="{{member.UserId}}" name="{{member.Name}}">
+                    {{member.Name}}
+                </mat-checkbox>
+            </section>
+        </form>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+        <button mat-button mat-dialog-close>Cancel</button>
+        <button type="button" mat-raised-button [mat-dialog-close]="true" color="primary" (click)="done()">Done</button>
+    </mat-dialog-actions>
+</div>

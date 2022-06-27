@@ -1,0 +1,16 @@
+.login-container,
+.image-container
+{
+    height: 100vh;
+    width: 50%;
+}
+
+.image-container img{
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+}
+
+.mat-card{
+    width: 500px;
+}

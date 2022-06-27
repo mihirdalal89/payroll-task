@@ -1,0 +1,91 @@
+<div class="">
+  <h2 mat-dialog-title>Add Task</h2>
+  <mat-dialog-content class="mat-typography">
+    <form [formGroup]="myTask" #myTasks>
+      <mat-form-field class="w-100" appearance="fill">
+        <mat-label>Title</mat-label>
+        <input type="text" matInput placeholder="Title" formControlName="Title">
+        <mat-error *ngIf="myTask.controls['Title'].touched">
+          Title is Required
+        </mat-error>
+        <mat-error *ngIf="myTask.controls['Title'].hasError('pattern')">
+          Only Alphabets are allowed
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="w-100 mt-3" appearance="fill">
+        <mat-label>Description</mat-label>
+        <textarea matInput placeholder="Description" formControlName="Description"></textarea>
+        <mat-error *ngIf="myTask.controls['Description'].touched && myTask.controls['Description'].invalid">
+          Description is Required
+        </mat-error>
+      </mat-form-field>
+      <div class="d-flex align-items-center mt-3">
+        <button type="button" mat-mini-fab color="primary" (click)="fileUpload.click()">
+          <mat-icon>attach_file</mat-icon>
+        </button>
+        <div class="ps-3">
+          {{fileName||'No File Uploaded Yet'}}
+        </div>
+        <mat-icon mat-mini-fab color="warn" class="ps-2 cancel-file" *ngIf="isFileAttached" (click)="cancelFile()">close</mat-icon>
+      </div>
+      <input type="file" class="d-none" (change)="fileDataUpload($event)" formControlName="Image" #fileUpload>
+      <!-- <mat-error *ngIf="myTask.controls['Image'].touched || myTask.controls['Image'].invalid">
+        Image is Required
+      </mat-error> -->
+      <div class="row mt-3">
+        <div class="col">
+          <mat-form-field class="w-100" appearance="fill">
+            <mat-label>Lead/Customer Name</mat-label>
+            <mat-select formControlName="LeadId" (change)="getLeadId($event)">
+              <mat-option *ngFor="let leadName of leadNames" [value]="leadName.Id" >
+                {{leadName.LeadName}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="myTask.controls['LeadId'].touched && myTask.controls['LeadId'].invalid">
+              Lead/Customer Name is Required
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field class="w-100" appearance="fill">
+            <mat-label>Select Due date</mat-label>
+            <input matInput [matDatepicker]="picker" [min]="minDate" formControlName="TaskEndDate">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-error *ngIf="myTask.controls['TaskEndDate'].touched && myTask.controls['TaskEndDate'].invalid">
+              Due date is Required
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col">
+          <mat-form-field class="w-100" appearance="fill">
+            <mat-label>Select Priority</mat-label>
+            <mat-select formControlName="Priority">
+              <mat-option *ngFor="let priority of priorities" [value]="priority.priorityValue">
+                {{priority.priority}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="myTask.controls['Priority'].touched && myTask.controls['Priority'].invalid">
+              Priority is Required
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col"></div>
+      </div>
+      <mat-form-field class="w-100 add-users mt-3" appearance="fill" (click)="openAddUsersDialog()">
+        <mat-label>Add Users</mat-label>
+        <input type="text" matInput placeholder="add-users" [value]="users?users+' Users':''" formControlName="AddUsers" readonly>
+      </mat-form-field>
+      <mat-form-field class="w-100 add-users mt-3" appearance="fill" (click)="openCCMembersDialog()">
+        <mat-label>Add CC Members</mat-label>
+        <input type="text" class="add-users" [value]="ccMembers?ccMembers+' Users':''" formControlName="AddCCMembers" matInput placeholder="">
+      </mat-form-field>
+    </form>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button type="button" mat-button mat-dialog-close (click)="checkFormDirty()">Cancel</button>
+    <button type="button" mat-raised-button color="primary" (click)="addMyTask()" [disabled]="myTask.invalid" mat-dialog-close>Add</button>
+  </mat-dialog-actions>
+</div>
